@@ -1,12 +1,14 @@
 import { Injectable } from "@nestjs/common";
+import { RegisterDto } from "./dtos/register.dto";
+import { LoginDto } from "./dtos/login.dto";
 
 @Injectable()
 export class AuthService {
-  register(authCredentials: object): Promise<void> {
+  register(registerCredentials: RegisterDto): Promise<void> {
     return 
   };
 
-  login(authCredentials: object): Promise<void> {
+  login(loginCredentials: LoginDto): Promise<void> {
     return 
   };
 };
