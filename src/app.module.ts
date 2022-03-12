@@ -5,11 +5,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { User } from './auth/user.entity';
+import { configValidation } from './config.validation';
 
 @Module({
   imports: [ 
     ConfigModule.forRoot({
       envFilePath: ['.env'],
+      validationSchema: configValidation
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
