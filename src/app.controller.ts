@@ -5,6 +5,6 @@ export class AppController {
   @Get()
   @Render('index')
   getHello(): object {
-    return { message: 'Hello world!' };
+    return { success: true };
   }
 }
