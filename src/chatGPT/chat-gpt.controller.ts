@@ -28,7 +28,7 @@ export class ChatGPTController {
     } catch (err) {
       res.status(400).json({
         success: false,
-        error: 'The image could not be generated',
+        error: err,
       });
     }
   }
