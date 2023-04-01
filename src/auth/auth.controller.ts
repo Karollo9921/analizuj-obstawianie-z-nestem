@@ -28,7 +28,7 @@ export class AuthController {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
       });
-      res.status(200).redirect('/home');
+      res.status(200).redirect('/chat-gpt');
     } catch (err) {
       return err;
     }
