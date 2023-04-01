@@ -1,10 +1,10 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Res } from '@nestjs/common';
 
 @Controller()
 export class AppController {
   @Get()
-  @Render('index')
-  getHello(): object {
-    return { success: true };
+  getLogin(@Res() res): object {
+    res.status(200);
+    return res.redirect('/auth/login');
   }
 }
