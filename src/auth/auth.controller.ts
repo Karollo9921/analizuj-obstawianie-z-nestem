@@ -11,27 +11,41 @@ export class AuthController {
   async register(
     @Body() registerCredentials: RegisterDto,
     @Res() res,
-  ): Promise<void> {
+  ): Promise<{ success: boolean; message: string }> {
     try {
       await this.authService.register(registerCredentials);
-      res.status(201).redirect('/auth/login');
+      return res.json({
+        success: true,
+        message: 'success',
+      });
     } catch (err) {
-      console.log(err);
-      return err;
+      return res.json({
+        success: false,
+        message: err.response.message,
+      });
     }
   }
 
   @Post('/login')
-  async login(@Body() loginCredentials: LoginDto, @Res() res): Promise<void> {
+  async login(
+    @Body() loginCredentials: LoginDto,
+    @Res() res,
+  ): Promise<{ success: boolean; message: string }> {
     try {
       const { access_token } = await this.authService.login(loginCredentials);
       res.cookie('jwt', access_token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
       });
-      res.status(200).redirect('/chat-gpt');
+      return res.json({
+        success: true,
+        message: 'success',
+      });
     } catch (err) {
-      return err;
+      return res.json({
+        success: false,
+        message: err.response.message,
+      });
     }
   }
 

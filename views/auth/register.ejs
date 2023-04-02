@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Register</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/js/register.js" defer></script>
 </head>
 <body>
 
@@ -15,28 +16,29 @@
     <div class="content">
 
       <header>Zarejestruj się</header>
+      <p id="error"></p>
 
-      <form action="/auth/register" method="POST">
+      <form id="register">
 
         <div class="field">
           <i class="fas fa-user"></i>
-          <input type="text" required placeholder="Login" name="login">
+          <input type="text" required placeholder="Login" name="login" id="login">
         </div><br>
 
         <div class="field">
           <i class="fas fa-envelope"></i>
-          <input type="email" required placeholder="Email" name="email">
+          <input type="email" required placeholder="Email" name="email" id="email">
         </div>
 
         <div class="field space">
           <i class="fas fa-lock"></i>
-          <input type="password" class="password" required placeholder="Hasło" name="password">
+          <input type="password" class="password" required placeholder="Hasło" name="password" id="password">
           <i class="fa fa-eye show"></i>
         </div>
 
         <div class="field space">
           <i class="fas fa-lock"></i>
-          <input type="password" class="password" required placeholder="Potwierdź Hasło" name="passwordConfirm">
+          <input type="password" class="password" required placeholder="Potwierdź Hasło" name="passwordConfirm" id="passwordConfirm">
           <i class="fa fa-eye show"></i>
         </div><br><br>
 

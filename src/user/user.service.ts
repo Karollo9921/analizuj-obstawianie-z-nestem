@@ -14,22 +14,26 @@ export class UserService {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await this.userModel.findOne({
-      $or: [{ login: dto.login }, { email: dto.email }],
+      $or: [{ login: login.toLowerCase() }, { email: email.toLowerCase() }],
     });
+
     if (user) {
       throw new BadRequestException('Provided Login or Email already exists');
     }
 
     return this.userModel.create({
-      login,
-      email,
+      login: login.toLowerCase(),
+      email: email.toLowerCase(),
       password: hashedPassword,
     });
   }
 
   findOne(loginEmail: string): Promise<User> {
     return this.userModel.findOne({
-      $or: [{ login: loginEmail }, { email: loginEmail }],
+      $or: [
+        { login: loginEmail.toLowerCase() },
+        { email: loginEmail.toLowerCase() },
+      ],
     });
   }
 }

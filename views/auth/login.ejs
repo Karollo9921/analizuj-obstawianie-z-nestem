@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/js/login.js" defer></script>
 </head>
 <body>
 
@@ -15,17 +16,18 @@
     <div class="content">
 
       <header>Zaloguj się</header>
+      <p id="error"></p>
 
-      <form action="/auth/login" method="POST">
+      <form id="login">
 
         <div class="field">
           <i class="fas fa-user"></i>
-          <input type="text" required placeholder="Email lub Login" name="loginEmail">
+          <input type="text" required placeholder="Email lub Login" name="loginEmail" id="loginEmail">
         </div>
 
         <div class="field space">
           <i class="fas fa-lock"></i>
-          <input type="password" class="password" required placeholder="Hasło" name="password">
+          <input type="password" class="password" required placeholder="Hasło" name="password" id="password">
           <i class="fa fa-eye show"></i>
         </div>
 
