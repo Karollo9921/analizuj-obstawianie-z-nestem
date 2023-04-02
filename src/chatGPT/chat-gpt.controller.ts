@@ -1,6 +1,5 @@
 import { Controller, Get, Render, Post, Body, Res } from '@nestjs/common';
 import { ChatGPTService } from './chat-gpt.service';
-import { SizeEnum } from './entity/size.enum';
 import { Throttle } from '@nestjs/throttler';
 
 @Controller('chat-gpt')
@@ -16,7 +15,7 @@ export class ChatGPTController {
   @Throttle(1, 15)
   @Post()
   async pushMessageToOpenAI(
-    @Body() body: { prompt: string; imageSize: SizeEnum },
+    @Body() body: { prompt: string; size: string },
     @Res() res,
   ) {
     try {

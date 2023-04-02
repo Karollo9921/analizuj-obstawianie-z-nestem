@@ -16,6 +16,7 @@ export class AuthController {
       await this.authService.register(registerCredentials);
       res.status(201).redirect('/auth/login');
     } catch (err) {
+      console.log(err);
       return err;
     }
   }

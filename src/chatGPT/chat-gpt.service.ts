@@ -5,7 +5,6 @@ import { Configuration, OpenAIApi } from 'openai';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ChatGPTMessage } from './entity/chat-gpt-message.entity';
-import { SizeEnum } from './entity/size.enum';
 
 @Injectable()
 export class ChatGPTService {
@@ -26,21 +25,28 @@ export class ChatGPTService {
 
   async pushMessageToOpenAI(body: {
     prompt: string;
-    imageSize: SizeEnum;
+    size: string;
   }): Promise<string> {
     const { prompt } = body;
     const user = this.requestService.getUser();
 
+    const imageSize =
+      body.size === 'small'
+        ? '256x256'
+        : body.size === 'medium'
+        ? '512x512'
+        : '1024x1024';
+
     const response = await this.openai.createImage({
       prompt,
       n: 1,
-      size: body.imageSize,
+      size: imageSize,
     });
 
     if (response) {
       await this.chatGPTMessageModel.create({
         message: prompt,
-        size: body.imageSize,
+        size: imageSize,
         email: user.email,
         login: user.login,
         success: true,
@@ -48,7 +54,7 @@ export class ChatGPTService {
     } else {
       await this.chatGPTMessageModel.create({
         message: prompt,
-        size: body.imageSize,
+        size: imageSize,
         email: user.email,
         login: user.login,
         success: false,

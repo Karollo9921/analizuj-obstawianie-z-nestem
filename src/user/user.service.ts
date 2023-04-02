@@ -13,7 +13,9 @@ export class UserService {
     const { login, email, password } = dto;
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await this.userModel.findOne({ $or: [{ login }, { email }] });
+    const user = await this.userModel.findOne({
+      $or: [{ login: dto.login }, { email: dto.email }],
+    });
     if (user) {
       throw new BadRequestException('Provided Login or Email already exists');
     }
